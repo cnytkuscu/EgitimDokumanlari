@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDoApp.DataAccess.Contexts;
+﻿using ToDoApp.DataAccess.Contexts;
 using ToDoApp.DataAccess.Interfaces;
 using ToDoApp.DataAccess.Repositories;
 
@@ -25,7 +20,7 @@ namespace ToDoApp.DataAccess.UnitOfWork
 
         public async Task SaveChanges()
         {
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }
