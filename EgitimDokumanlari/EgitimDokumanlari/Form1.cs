@@ -1,5 +1,3 @@
-using AsenkronikMimari;
-
 namespace EgitimDokumanlari
 {
     public partial class Form1 : Form

@@ -19,10 +19,10 @@ namespace ToDoApp.UI
 
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"node_modules")),
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "node_modules")),
                 RequestPath = "/node_modules"
             });
-            
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

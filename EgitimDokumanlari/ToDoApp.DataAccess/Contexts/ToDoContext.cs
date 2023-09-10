@@ -8,7 +8,7 @@ namespace ToDoApp.DataAccess.Contexts
     {
         public ToDoContext(DbContextOptions<ToDoContext> options) : base(options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
