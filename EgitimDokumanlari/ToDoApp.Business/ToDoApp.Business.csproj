@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToDoApp.DataAccess\ToDoApp.DataAccess.csproj" />
+    <ProjectReference Include="..\ToDoApp.DTO\ToDoApp.DTO.csproj" />
+  </ItemGroup>
+
+</Project>
