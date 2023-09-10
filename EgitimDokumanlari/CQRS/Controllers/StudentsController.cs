@@ -1,6 +1,7 @@
 ﻿using CQRS.CQRS.Commands;
 using CQRS.CQRS.Handlers;
 using CQRS.CQRS.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CQRS.Controllers
@@ -9,55 +10,51 @@ namespace CQRS.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly GetStudentByIdQueryHandler _getStudentByIdQueryHandler;
-        private readonly GetAllStudentQueryHandler _getAllStudentQueryHandler;
-        private readonly CreateStudentCommandHandler _createStudentCommandHandler;
-        private readonly DeleteStudentByIdCommandHandler _deleteStudentByIdCommandHandler;
-        private readonly UpdateStudentCommandHandler _updateStudentCommandHandler;
+        
+        private readonly IMediator _mediator;
 
-        public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler, GetAllStudentQueryHandler getAllStudentQueryHandler, CreateStudentCommandHandler createStudentCommandHandler, DeleteStudentByIdCommandHandler deleteStudentByIdCommandHandler, UpdateStudentCommandHandler updateStudentCommandHandler)
+        public StudentsController(IMediator mediator)
         {
-            _getStudentByIdQueryHandler = getStudentByIdQueryHandler;
-            _getAllStudentQueryHandler = getAllStudentQueryHandler;
-            _createStudentCommandHandler = createStudentCommandHandler;
-            _deleteStudentByIdCommandHandler = deleteStudentByIdCommandHandler;
-            _updateStudentCommandHandler = updateStudentCommandHandler;
+            _mediator = mediator;
         }
 
 
+
+
+
         [HttpGet]
-        public IActionResult GetAllStudents()
+        public async Task<IActionResult> GetAllStudents()
         {
-            var result = _getAllStudentQueryHandler.Handle(new GetAllStudentQuery());
+            var result = await _mediator.Send(new GetAllStudentQuery());
             return Ok(result);
         }
 
 
         [HttpGet("{id}")]
-        public IActionResult GetStudent(int id)
+        public async Task<IActionResult> GetStudent(int id)
         {
-            var result = this._getStudentByIdQueryHandler.Handle(new GetStudentByIdQuery(id));
+            var result = await _mediator.Send(new GetStudentByIdQuery(id));
             return Ok(result);
         }
 
         [HttpPost]
         public IActionResult CreateStudent(CreateStudentCommand command)
         {
-            _createStudentCommandHandler.Handle(command);
+            _mediator.Send(command);
             return Ok();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteStudent(int id)
+        public async Task<IActionResult> DeleteStudent(int id)
         {
-            var result = _deleteStudentByIdCommandHandler.Handle(new DeleteStudentByIdCommand(id));
+            var result = await _mediator.Send(new DeleteStudentByIdCommand(id));
             return Ok(result);
         }
 
         [HttpPut]
-        public IActionResult UpdateStudent(UpdateStudentCommand command)
+        public async Task<IActionResult> UpdateStudent(UpdateStudentCommand command)
         {
-            var result = _updateStudentCommandHandler.Handle(command);
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
     }

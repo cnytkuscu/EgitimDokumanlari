@@ -1,5 +1,6 @@
 using CQRS.CQRS.Handlers;
 using CQRS.Data;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace CQRS
@@ -15,14 +16,14 @@ namespace CQRS
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
-            builder.Services.AddScoped<GetStudentByIdQueryHandler>();
-            builder.Services.AddScoped<GetAllStudentQueryHandler>();
+            builder.Services.AddMediatR(typeof(Program));
 
-            builder.Services.AddScoped<CreateStudentCommandHandler>();
+            //builder.Services.AddScoped<GetStudentByIdQueryHandler>();
+            //builder.Services.AddScoped<GetAllStudentQueryHandler>();
+            //builder.Services.AddScoped<CreateStudentCommandHandler>();
+            //builder.Services.AddScoped<DeleteStudentByIdCommandHandler>();
+            //builder.Services.AddScoped<UpdateStudentCommandHandler>();
 
-            builder.Services.AddScoped<DeleteStudentByIdCommandHandler>();
-
-            builder.Services.AddScoped<UpdateStudentCommandHandler>();
 
             builder.Services.AddDbContext<StudentContext>(opt =>
             {

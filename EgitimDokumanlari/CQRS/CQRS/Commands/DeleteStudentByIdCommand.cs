@@ -1,6 +1,9 @@
-﻿namespace CQRS.CQRS.Commands
+﻿using CQRS.CQRS.Results;
+using MediatR;
+
+namespace CQRS.CQRS.Commands
 {
-    public class DeleteStudentByIdCommand
+    public class DeleteStudentByIdCommand : IRequest<DeleteStudentByIdCommandResult>
     {
         public int Id { get; set; }
 

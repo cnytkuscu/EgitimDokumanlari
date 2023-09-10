@@ -1,6 +1,9 @@
-﻿namespace CQRS.CQRS.Queries
+﻿using CQRS.CQRS.Results;
+using MediatR;
+
+namespace CQRS.CQRS.Queries
 {
-    public class GetAllStudentQuery
+    public class GetAllStudentQuery : IRequest<IEnumerable<GetAllStudentQueryResult>>
     {
     }
 }
