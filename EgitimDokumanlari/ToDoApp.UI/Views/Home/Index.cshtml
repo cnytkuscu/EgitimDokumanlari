@@ -1,0 +1,40 @@
+﻿@model List<WorkListDTO>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> TO DO APP</title>
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <p class="text-danger"> DANGER </p>
+    <div class="container my-2">
+        <table class="table table-hovered table-bordered table-sm ">
+            <thead>
+                <tr>
+                    <th>
+                        İş
+                    </th>
+                    <th>
+                        Durumu
+                    </th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Definition
+                        </td>
+                        <td>
+                            @(item.IsCompleted ? "Tamamlandı" : "Tamamlanmadı")
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

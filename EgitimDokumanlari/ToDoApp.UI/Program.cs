@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using ToDoApp.Business.DependencyResolvers.Microsoft;
 
 namespace ToDoApp.UI
@@ -9,19 +10,32 @@ namespace ToDoApp.UI
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDependencies();
+            builder.Services.AddControllersWithViews();
+
             // Add services to the container.
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"node_modules")),
+                RequestPath = "/node_modules"
+            });
+            
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
             }
-            app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            });
 
             app.UseAuthorization();
 
